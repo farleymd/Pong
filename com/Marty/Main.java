@@ -63,6 +63,7 @@ public class Main {
             //System.out.println("* Repaint *");
 
             if (gameOver == true) {
+                g.setColor(Color.red);
                 g.drawString( "Game over!", 20, 30 );
                 g.drawString ("Player score:" + playerScore, 20, 60);
                 g.drawString ("Press n for new game", 20, 90);
@@ -70,18 +71,20 @@ public class Main {
             }
 
             if (removeInstructions == false ) {
+                g.setColor(Color.red);
                 g.drawString("Pong! Press up or down to move", 20, 30);
                 g.drawString("Press q to quit", 20, 60);
             }
 
-            g.setColor(Color.blue);
+            g.setColor(Color.green);
 
             //While game is playing, these methods draw the ball, paddles, using the global variables
             //Other parts of the code will modify these variables
 
             //Ball - a circle is just an oval with the height equal to the width
-            g.drawOval((int)ballX, (int)ballY, ballSize, ballSize);
+            g.fillOval((int)ballX, (int)ballY, ballSize, ballSize);
             //Computer paddle
+            g.setColor(Color.blue);
             g.drawLine(paddleDistanceFromSide, computerPaddleY - paddleSize, paddleDistanceFromSide, computerPaddleY + paddleSize);
             //Human paddle
             g.drawLine(screenSize - paddleDistanceFromSide, humanPaddleY - paddleSize, screenSize - paddleDistanceFromSide, humanPaddleY + paddleSize);
