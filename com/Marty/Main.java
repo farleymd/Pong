@@ -1,4 +1,4 @@
-package com.clara;
+package com.Marty;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,6 +34,9 @@ public class Main {
     
     static double ballSpeed = 5;   //Again, pixels moved per clock tick
 
+    static int playerScore;
+    int computerScore;
+
 
     //An angle in radians (which range from 0 to 2xPI (0 to about 6.3).
     //This starts the ball moving down toward the human. Replace with some of the other
@@ -61,6 +64,8 @@ public class Main {
 
             if (gameOver == true) {
                 g.drawString( "Game over!", 20, 30 );
+                g.drawString ("Player score:" + playerScore, 20, 60);
+                g.drawString ("Press n for new game", 20, 90);
                 return;
             }
 
@@ -91,8 +96,13 @@ public class Main {
         public void keyTyped(KeyEvent ev) {
             char keyPressed = ev.getKeyChar();
             char q = 'q';
+            char n = 'n';
             if( keyPressed == q){
                 System.exit(0);    //quit if user presses the q key.
+            }
+
+            if (keyPressed == n){
+                newGame();
             }
         }
         
@@ -133,6 +143,22 @@ public class Main {
         }
 
     }
+
+    protected static void newGame() {
+        removeInstructions = false;
+        gameOver = false;
+
+        computerPaddleY = screenSize/2;
+        humanPaddleY = screenSize/2;
+        ballX = screenSize/2;
+        ballY=screenSize/2;
+        ballDirection = Math.PI +1;
+
+        timer.start();
+        gamePanel.repaint();
+
+    }
+
 
     
     public static void main(String[] args) {
@@ -223,6 +249,7 @@ public class Main {
 
         if (ballX <= 0 || ballX >= screenSize ) {
             gameOver = true;
+            playerScore = playerScore + 1;
             return;
         }
         if (ballY <= 0 || ballY >= screenSize-ballSize) {
